@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+    <link rel="stylesheet" href="/build/example-design-system.css">
+    <script type="module" src="/build/example-design-system.esm.js"></script>
+    <script nomodule src="/build/example-design-system.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <h3>Buttons</h3>
+      </div>
+      <div class="row space-between">
+        <example-button text="Default"></example-button>
+        <example-button text="Primary" appearance="btn-primary" id="primary"></example-button>
+        <example-button text="Secondary" appearance="btn-secondary"></example-button>
+        <example-button text="Tertiary" appearance="btn-tertiary"></example-button>
+        <example-button text="Warning" appearance="btn-warning"></example-button>
+        <example-button text="Danger" appearance="btn-danger"></example-button>
+      </div>
+      <div class="row">
+        <h3>Modal</h3>
+      </div>
+      <div class="row space-between">
+        <example-button text="Open modal" appearance="btn-primary" id="openModal"></example-button>
+        <example-modal header="Modal Header" appearance="btn-primary" buttons='[{"text": "Confirm"}, {"text": "Cancel"}]'>Body content</example-modal>
+      </div>
+    </div>
+    <script>
+      const btn = document.querySelector('#openModal')
+      const modal = document.querySelector('example-modal')
+
+      btn.addEventListener('click', () => {
+        modal.isOpen = true
+      })
+    </script>
+  </body>
+</html>

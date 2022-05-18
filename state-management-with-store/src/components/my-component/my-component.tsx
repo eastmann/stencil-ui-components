@@ -1,5 +1,5 @@
 import { Component, getAssetPath, Host, h } from '@stencil/core'
-import state from '../../../src/store/cart'
+import state from '../../store/store'
 
 @Component({
   tag: 'my-component',
@@ -23,6 +23,9 @@ export class MyComponent {
   add() {
     if (state.quantity < this.maxPurchase) {
       state.quantity++
+
+      // debug
+      console.log('QUANTITY MAIN:', state.quantity)
     }
   }
 
@@ -51,6 +54,7 @@ export class MyComponent {
               </div>
               <span class="snapshot__price">{this.currency}{this.price}</span>
               <button class="snapshot__button" onClick={() => this.add()}>Add to Cart</button>
+              <clear-button></clear-button>
             </div>
             <div class="products__product--description">
               <h1>{this.name}</h1>
@@ -88,17 +92,13 @@ export class MyComponent {
                   {this.name}
                 </td>
                 <td class="products__cart--detail">
-                {
-                  state.quantity > 0
-                  ?
-                  <button onClick={() => this.decrement()}>-</button>
+                { state.quantity > 0
+                  ? <button onClick={() => this.decrement()}>-</button>
                   : null
                 }
                 <span class="products__cart--detail-quantity">{state.quantity}</span>
-                {
-                  state.quantity < this.maxPurchase
-                  ?
-                  <button onClick={() => this.increment()}>+</button>
+                { state.quantity < this.maxPurchase
+                  ? <button onClick={() => this.increment()}>+</button>
                   : null
                 }
                 </td>
@@ -121,10 +121,10 @@ export class MyComponent {
             </tbody>
             }
           </table>
-        {state.quantity === this.maxPurchase ?
-          <div class="cart__warning">
-            <h1>Warning! Maximum of {this.maxPurchase} purchases only</h1>
-          </div>
+        {state.quantity === this.maxPurchase
+          ? <div class="cart__warning">
+              <h1>Warning! Maximum of {this.maxPurchase} purchases only</h1>
+            </div>
           : null
           }
 

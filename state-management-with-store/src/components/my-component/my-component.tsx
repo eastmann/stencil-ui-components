@@ -10,7 +10,7 @@ import state from '../../store/store'
 
 export class MyComponent {
 
-  private name = 'Traditional Clock'
+  private name = 'Stencil Store'
   private currency = '$'
   private price = 25.00
   private maxPurchase = 5
@@ -58,18 +58,12 @@ export class MyComponent {
             </div>
             <div class="products__product--description">
               <h1>{this.name}</h1>
-              <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet elit pharetra, posuere
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet elit pharetra, posuere
               mauris vel, congue metus. Nulla at tortor placerat purus vulputate cursus ut et quam. In lacinia gravida
-              sapien vitae molestie.
-              </p>
+              sapien vitae molestie.</p>
               <p>Etiam non mi augue. Nulla nisi felis, rhoncus at vestibulum sit amet, gravida
-              sed dolor. Quisque congue nulla felis, eget malesuada ex efficitur ut.
-              </p>
-
-              <p>Morbi dignissim erat eros, eu
-              volutpat massa mollis eu. Proin sodales ultrices nibh, consectetur lobortis augue dignissim non.
-              </p>
+              sed dolor. Quisque congue nulla felis, eget malesuada ex efficitur ut.</p>
+              <p>Morbi dignissim erat eros, eu volutpat massa mollis eu. Proin sodales ultrices nibh, consectetur lobortis augue dignissim non.</p>
             </div>
           </div>
 
@@ -85,48 +79,42 @@ export class MyComponent {
                 <th class="products__cart--detail">Total</th>
               </tr>
             </thead>
-          {state.quantity > 0 ?
             <tbody>
               <tr>
                 <td class="products__cart--product">
                   {this.name}
                 </td>
                 <td class="products__cart--detail">
-                { state.quantity > 0
-                  ? <button onClick={() => this.decrement()}>-</button>
-                  : null
-                }
-                <span class="products__cart--detail-quantity">{state.quantity}</span>
-                { state.quantity < this.maxPurchase
-                  ? <button onClick={() => this.increment()}>+</button>
-                  : null
-                }
+                  <button onClick={() => this.decrement()} disabled={state.quantity === 0}>-</button>
+                  <span class="products__cart--detail-quantity">{state.quantity}</span>
+                  <button onClick={() => this.increment()} disabled={state.quantity === this.maxPurchase}>+</button>
                 </td>
                 <td class="products__cart--detail">
-                {this.currency}{state.price}
+                  {this.currency}{state.price}
                 </td>
                 <td class="products__cart--detail">
-                {this.currency}{state.tax}
+                  {this.currency}{state.tax}
                 </td>
                 <td class="products__cart--detail">
-                {this.currency}{state.total}
+                  {this.currency}{state.total}
                 </td>
               </tr>
             </tbody>
-            :
-            <tbody>
-              <tr>
-                <td colSpan={5}>No Items</td>
-              </tr>
-            </tbody>
-            }
+          {state.quantity > 0
+            ? null
+            : <tbody>
+                <tr>
+                  <td colSpan={5}>No Items</td>
+                </tr>
+              </tbody>
+          }
           </table>
         {state.quantity === this.maxPurchase
           ? <div class="cart__warning">
               <h1>Warning! Maximum of {this.maxPurchase} purchases only</h1>
             </div>
           : null
-          }
+        }
 
           </div>
         </div>
